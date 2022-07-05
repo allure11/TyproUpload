@@ -1,6 +1,6 @@
 # yml配置文件
 server:
-  port: 8080
+  port: 8001
 
 # 配置JDBC
 spring:
