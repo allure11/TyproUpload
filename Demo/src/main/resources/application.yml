@@ -1,0 +1,46 @@
+# yml配置文件
+server:
+  port: 8080
+
+# 配置JDBC
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://www.springzym.ltd:3306/TUDB?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: zxc001
+  # 文件上传
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      location: ./ # 临时文件放置位置
+# 配置默认静态 配置...文件位置
+#  web:
+#    resources:
+#      static-locations:
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    enabled: true
+  web:
+    resources:
+      chain:
+        strategy:
+          content:
+            enabled: true
+            paths: /**
+      static-locations: classpath:/public/, classpath:/static/, classpath:/pages/
+  mvc:
+    static-path-pattern: /**
+
+# 自定义上传文件的文件夹位置
+#upload:
+#  location: /pages
+
+
+
+
+
