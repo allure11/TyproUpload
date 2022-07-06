@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/theme-chalk-2.15.7.css" />
+</head>
+
+<body>
+<div align="center">
+    <h1 align="center">文件上传</h1>
+    <div id="app">
+
+        <el-upload class="upload-demo" drag action="/file/uploadFile" multiple>
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div class="el-upload__tip" slot="tip">只能上传HTML文件</div>
+        </el-upload>
+
+    </div>
+</div>
+
+<script src="/js/vue-2.6.14.js"></script>
+<script src="/js/axios-0.26.js"></script>
+<script src="/js/element-ui-2.15.7.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            /*文件上传*/
+            // dialogImageUrl: '',
+            // dialogVisible: false,
+            disabled: false
+        },
+        methods: {
+            /*文件上传*/
+            handleRemove(file) {
+                console.log(file);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
+            handleDownload(file) {
+                console.log(file);
+            }
+        },
+    })
+</script>
+</body>
+
+</html>

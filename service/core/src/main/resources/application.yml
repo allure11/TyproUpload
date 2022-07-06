@@ -1,0 +1,35 @@
+# yml配置文件
+server:
+  port: 8001
+
+# 配置JDBC
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://www.springzym.ltd:3306/TUDB?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: zxc001
+    type: com.alibaba.druid.pool.DruidDataSource
+  # 文件上传
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+      location: ./ # 临时文件放置位置
+  web:
+    resources:
+      chain:
+        strategy:
+          content:
+            enabled: true
+            paths: /**
+      static-locations: classpath:/public/, classpath:/static/, classpath:/pages/
+  mvc:
+    static-path-pattern: /**
+
+
+
+
+
+
