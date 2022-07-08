@@ -18,7 +18,7 @@ public class MyMetaObjectHandller implements MetaObjectHandler {
         // 新建时填充创建时间和修改时间
         this.setFieldValByName("gmtCreate", LocalDateTime.now(), metaObject);
         this.setFieldValByName("gmtModified", LocalDateTime.now(), metaObject);
-        this.setFieldValByName("isDeleted", 0, metaObject);
+        this.setFieldValByName("isDelete", 0, metaObject);
         this.setFieldValByName("version", 0L, metaObject);
         this.setFieldValByName("status", "Draft", metaObject);
 

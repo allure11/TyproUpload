@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
-
 /**
  * <p>
  *  文件操作前端控制器
@@ -32,11 +30,6 @@ public class FileController {
      * 文件相关服务
      */
     private FileService fileServiceImpl;
-
-    /**
-     * 项目根路径
-     */
-    private String location;
 
     @Autowired
     public FileController(FileService fileServiceImpl) {
@@ -61,7 +54,6 @@ public class FileController {
      * @param file 文件
      * @param redirectAttributes 重定向之后还能带参数跳转
      * @return
-     * @throws IOException
      */
     @PostMapping("uploadFile")
     public R uploadFile(MultipartFile file, RedirectAttributes redirectAttributes) {

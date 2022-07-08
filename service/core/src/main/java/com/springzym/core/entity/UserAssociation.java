@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -11,37 +14,37 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
  * <p>
- * 文件对象
+ * 
  * </p>
  *
  * @author springzym
- * @since 2022-07-05
+ * @since 2022-07-08
  */
-@TableName("tb_file")
-@ApiModel(value = "File对象", description = "")
-public class MyFile implements Serializable {
+@TableName("user_association")
+@ApiModel(value = "UserAssociation对象", description = "")
+public class UserAssociation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("文件ID")
+    @ApiModelProperty("id")
     @TableId
     private String id;
 
-    @ApiModelProperty("文件名称	")
-    private String filename;
+    @ApiModelProperty("用户id")
+    private String userId;
 
-    @ApiModelProperty("新建时间	")
+    @ApiModelProperty("第三方平台id")
+    private String tripartiteId;
+
+    @ApiModelProperty("创建时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime gmtCreate;
 
-    @ApiModelProperty("更新时间")
+    @ApiModelProperty("修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -56,12 +59,20 @@ public class MyFile implements Serializable {
         this.id = id;
     }
 
-    public String getFilename() {
-        return filename;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getTripartiteId() {
+        return tripartiteId;
+    }
+
+    public void setTripartiteId(String tripartiteId) {
+        this.tripartiteId = tripartiteId;
     }
 
     public LocalDateTime getGmtCreate() {
@@ -82,9 +93,10 @@ public class MyFile implements Serializable {
 
     @Override
     public String toString() {
-        return "File{" +
+        return "UserAssociation{" +
         "id=" + id +
-        ", filename=" + filename +
+        ", userId=" + userId +
+        ", tripartiteId=" + tripartiteId +
         ", gmtCreate=" + gmtCreate +
         ", gmtModified=" + gmtModified +
         "}";

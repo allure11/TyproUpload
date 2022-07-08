@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 全局异常处理
+ * 自定义异常类
  * @author springzym
  */
 public class GlobalException extends RuntimeException {

@@ -64,7 +64,6 @@ public class R {
         this.success = success;
     }
 
-
     private R(){
         new GlobalException("不允许通过构造方法创建 R 对象");
     }
@@ -72,19 +71,31 @@ public class R {
     public static R ok() {
         return new R(Code.SUCCESS,"操作成功", true);
     }
+
     public static R ok(String msg) {
         return new R(Code.SUCCESS, msg, true);
+    }
+
+    public static R ok(Boolean success) {
+        if (success){
+            return new R(Code.SUCCESS,"操作成功", success);
+        }else {
+            return new R(Code.SUCCESS,"操作失败", success);
+        }
     }
 
     public static R error() {
         return new R(Code.ERROR,"操作失败", false);
     }
+
     public static R error(String msg) {
         return new R(Code.ERROR, msg, false);
     }
 
 
-    /***************************getter setter toString************************/
+    /**
+     * getter setter toString
+     */
     public Integer getCode() {
         return code;
     }

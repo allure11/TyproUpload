@@ -29,6 +29,11 @@
         <velocity-engine-core>2.3</velocity-engine-core>
         <mysql-connector-java.version>8.0.13</mysql-connector-java.version>
         <druid-spring-boot-starter.version>1.2.8</druid-spring-boot-starter.version>
+        <swagger.version>1.5.22</swagger.version>
+        <spring-boot-starter-oauth2-client.version>2.5.2</spring-boot-starter-oauth2-client.version>
+        <httpclient.version>4.5.13</httpclient.version>
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+
     </properties>
 
     <dependencyManagement>
@@ -72,6 +77,35 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!-- Swagger -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-client</artifactId>
+                <version>${spring-boot-starter-oauth2-client.version}</version>
+            </dependency>
+            <!--httpclient-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${commons-httpclient.version}</version>
             </dependency>
 
         </dependencies>
