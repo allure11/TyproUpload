@@ -1,7 +1,6 @@
 package com.springzym.core.service.Aouth.impl;
 
 import com.alibaba.druid.support.json.JSONUtils;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.springzym.core.entity.GithubUser;
 import com.springzym.core.entity.User;
 import com.springzym.core.entity.UserAssociation;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 /**
  * GitHub登录服务接口实现类
@@ -49,11 +47,11 @@ public class GitHub implements AouthService {
     }
 
     /**
-     * 获取 token 信息
+     * 获取用户信息
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public R getToken(String code) throws Exception {
+    public R getUserInfo(String code) throws Exception {
         boolean flag = false;
         User user = new User();
         // 根据code获取token
@@ -68,38 +66,38 @@ public class GitHub implements AouthService {
         map.put("accept", "application/json");
         map.put("Authorization","token "+token.split("&")[0].split("=")[1]);
         String s1 = HttpClientUtils.get("https://api.github.com/user", map);
-        logger.info(s1);
 
         // 将 json 信息转换成hashmap
         HashMap<String, Object> userinfo = (HashMap<String, Object>) JSONUtils.parse(s1);
         GithubUser githubUser = new GithubUser(userinfo);
+        String githubId = githubUser.getId();
+        GithubUser one = githubUserServiceImpl.getById(String.valueOf(githubUser.getId()));
 
-        if (!Optional.ofNullable(githubUserServiceImpl.getById(githubUser.getId())).isPresent()){
+        if (one == null) {
+            logger.info("用户不存在，新增用户: "+ githubUser.getName());
+            // 新增 github 用户
             flag = githubUserServiceImpl.save(githubUser);
-            logger.info(githubUser.toString());
 
             // 保存用户信息
             user.setName(String.valueOf(githubUser.getName()));
             user.setAvatarUrl(String.valueOf(githubUser.getAvatarUrl()));
             user.setEmail(String.valueOf(githubUser.getEmail()));
             flag = userServiceImpl.save(user);
-            logger.info(user.toString());
 
+            // 保存用户与 github 用户 关联信息
             UserAssociation userAssociation = new UserAssociation();
             userAssociation.setUserId(user.getId());
             userAssociation.setTripartiteId(githubUser.getId());
             flag = userAssociationServiceImpl.save(userAssociation);
         } else {
+            // 根据 github 用户的 id 查找用户信息
             user = userServiceImpl.getIdAndNameByTripartiteId(githubUser.getId());
-//            QueryWrapper<UserAssociation> wrapper = new QueryWrapper<>();
-//            wrapper.eq("tripartite_id", githubUser.getId());
-//            UserAssociation one = userAssociationServiceImpl.getOne(wrapper);
-//            QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-//            userQueryWrapper.eq("id", one.getUserId());
-//            user = userServiceImpl.getOne(userQueryWrapper);
+            logger.info("用户存在，登录成功，用户名："+user.getName());
+            if (user != null){
+                flag = true;
+            }
         }
 
-
-        return R.ok(flag).setData("user", user);
+        return R.ifSuccess(flag).setData("user", user);
     }
 }

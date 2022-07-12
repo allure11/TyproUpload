@@ -13,6 +13,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login").loginProcessingUrl("/login").successForwardUrl("/index");
+        http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").successForwardUrl("/index");
     }
 }

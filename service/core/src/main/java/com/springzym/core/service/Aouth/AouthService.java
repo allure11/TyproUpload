@@ -13,8 +13,8 @@ public interface AouthService {
     R login();
 
     /**
-     * 获取 token 信息
+     * 获取用户信息
      * @param code github登录返回的code
      */
-    R getToken(String code) throws Exception;
+    R getUserInfo(String code) throws Exception;
 }

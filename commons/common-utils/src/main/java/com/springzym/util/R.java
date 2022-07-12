@@ -76,11 +76,11 @@ public class R {
         return new R(Code.SUCCESS, msg, true);
     }
 
-    public static R ok(Boolean success) {
+    public static R ifSuccess(Boolean success) {
         if (success){
             return new R(Code.SUCCESS,"操作成功", success);
         }else {
-            return new R(Code.SUCCESS,"操作失败", success);
+            return new R(Code.ERROR,"操作失败", success);
         }
     }
 

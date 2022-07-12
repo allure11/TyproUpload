@@ -1,5 +1,7 @@
 package com.springzym.core.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.Instant;
@@ -54,6 +56,8 @@ public class GithubUser implements Serializable {
 
     @ApiModelProperty("修改时间")
     private LocalDateTime gmtModified;
+
+    public GithubUser() {}
 
     public GithubUser(HashMap<String, Object> userinfo) {
         this.id = String.valueOf(userinfo.get("id"));
