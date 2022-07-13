@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://www.springzym.ltd:3306/TUDB?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: zxc001
+    password: zxc123456
     type: com.alibaba.druid.pool.DruidDataSource
   # 文件上传
   servlet:
